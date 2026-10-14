@@ -5,10 +5,12 @@
 
  
     //Chamar as outras classes
-    $vet = new Veterinario(1, "vet", "Clínico Geral", 13000, "Rua Blá", "11934242821");
-    $enzo = new Veterinario(2, "Enzo", "Clínico Geral", 20000, "Rua GG", "11111111111");
+    $allan = new Veterinario(1, "Allan", "Clínico Geral", 13000, "Rua Blá", "11934242821");
+    $joao = new Veterinario(2, "Joao", "Clínico Geral", 20000, "Rua GG", "11111111111");
+    $cleide = new Veterinario(3, "Cleide", "Clinico Geral", 30000, "Rua DD", "2222222222");
 
-    echo $vet->imprimir();
-    echo $enzo->imprimir();
+    echo $allan->imprimir();
+    echo $joao->imprimir();
+    echo $cleide->imprimir();
 
 ?>
