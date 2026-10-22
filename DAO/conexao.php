@@ -7,9 +7,9 @@
                 $coon = mysqli_connect('localhost', 'root', '', 'clinicaVeterinaria');
                 if($coon){
                     return $coon;
-                    echo "Conectado";
+                    echo "Conectado!";
                 }else{
-                    echo "Conexão Falhou";
+                    echo "Conexão Falhou!";
                 }
 
             }
