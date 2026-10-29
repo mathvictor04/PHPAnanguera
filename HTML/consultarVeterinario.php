@@ -3,7 +3,7 @@
     require_once('../DAO/Conexao.php');
     require_once('../DAO/Consultar.php');
 
-    use ClinicaVeterinaria\projeto\DAO\conexao;
+    use ClinicaVeterinaria\projeto\DAO\Conexao;
     use ClinicaVeterinaria\projeto\DAO\Consultar;
 
     $conexao = new Conexao();
@@ -29,6 +29,6 @@
         </button>
     </form>
     <?php   echo $resultado;?>
-    <a href="#"><button>Voltar</button></a> 
+    <a href="../index.php"><button>Voltar</button></a> 
 </body>
 </html>

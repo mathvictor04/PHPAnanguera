@@ -54,7 +54,7 @@
         }
      ?>
      </button>
-        <button><a href="#">Voltar</a></button>
+        <button><a href="../index.php">Voltar</a></button>
         <div>
         <?php
             if(isset($_POST['nome'])){
