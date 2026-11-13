@@ -1,6 +1,7 @@
 <?php
     namespace ClinicaVeterinaria\projeto\HTML;
-    require_once('../DAO/Conexao.php');
+
+    require_once('../DAO/conexao.php');
     require_once('../DAO/excluir.php');
 
     use ClinicaVeterinaria\projeto\DAO\Conexao;
@@ -9,29 +10,69 @@
     $conexao = new Conexao();
     $excluir = new Excluir();
     $resultado = "";
+
+    // Verificar se o formulario foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $codigo = filter_input(
+            INPUT_POST,
+            'codigo',
+            FILTER_VALIDATE_INT
+        );
+
+        if ($codigo !== false && $codigo !== null && $codigo > 0) {
+
+            $resultado = $excluir->excluirVeterinario(
+                $conexao,
+                $codigo
+            );
+
+        } else {
+
+            $resultado = "Informe um codigo valido!";
+        }
+    }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir Veterinario</title>
 </head>
+
 <body>
+
     <h1>Excluir Veterinario</h1>
+
     <form method="POST">
-        <label>Codigo</label>
-        <input type="number" id="codigo" name="codigo"/>
-        <button type="submit">Excluir
-            <?php
-                $codigo = $_POST['codigo'];
-                $resultado = $excluir->excluirVeterinario($conexao, $codigo);
-            ?>
-        </button>
+
+        <label>Codigo:</label>
+
+        <input
+            type="number"
+            name="codigo"
+            id="codigo"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">Excluir</button>
+
     </form>
-    <?php
-        echo $resultado;
-    ?>
-    <a href="../index.php"><button>Voltar</button></a>
+
+    <div>
+        <?php echo htmlspecialchars($resultado); ?>
+    </div>
+
+    <br>
+
+    <a href="../index.php">
+        <button type="button">Voltar</button>
+    </a>
+
 </body>
 </html>

@@ -1,28 +1,55 @@
 <?php
-    namespace ClinicaVeterinaria\projeto\DAO;
-    use ClinicaVeterinaria\projeto\DAO\Conexao;
 
-    class Inserir{
-        public function cadastrarVeterinario(Conexao $conexao, string $nome, string $telefone, string $endereco, float $salario, string $especialidade)
+namespace ClinicaVeterinaria\projeto\DAO;
 
-        {
-            try{
-                $conn = $conexao->conectar();//Abre a conexao com o banco
-                $sql = "Insert into veterinario(codigo, nome, especialidade, salario, endereco, telefone) values('', '$nome','$especialidade','$salario','$endereco','$telefone')";//Preparando comando
-                $result = mysqli_query($conn,$sql);//Executar o comando no bd
-                //Verifico se executou ou nao
+use ClinicaVeterinaria\projeto\DAO\Conexao;
 
-                if($result){
-                    return "<br><br>Inserido com sucesso!";
-                }
-                    return "<br><br>Nao inserido!";
+class Inserir {
 
-            }catch(Exception $erro){
-                return "<br><br>Impossivel cadastrar cliente <br><br> $erro";
+    public function cadastrarVeterinario(
+        Conexao $conexao,
+        string $nome,
+        string $telefone,
+        string $endereco,
+        float $salario,
+        string $especialidade
+    ) {
+
+        try {
+
+            $conn = $conexao->conectar();
+
+            $sql = "INSERT INTO veterinario
+                    (nome, especialidade, salario, endereco, telefone)
+                    VALUES (?, ?, ?, ?, ?)";
+
+            $stmt = mysqli_prepare($conn, $sql);
+
+            mysqli_stmt_bind_param(
+                $stmt,
+                "ssdss",
+                $nome,
+                $especialidade,
+                $salario,
+                $endereco,
+                $telefone
+            );
+
+            $result = mysqli_stmt_execute($stmt);
+
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+
+            if ($result) {
+                return "Veterinário cadastrado com sucesso!";
             }
-        }//fim do metodo cadastrar
-    }//fim da classe
 
+            return "Não foi possível cadastrar.";
 
+        } catch (\Throwable $erro) {
 
+            return "Erro ao cadastrar: " . $erro->getMessage();
+        }
+    }
+}
 ?>
