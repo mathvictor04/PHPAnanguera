@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
+$codigo = filter_input(INPUT_POST, "codigo", FILTER_VALIDATE_INT);
 $nome = trim($_POST["nome"] ?? "");
 $especie = trim($_POST["especie"] ?? "");
 $raca = trim($_POST["raca"] ?? "");

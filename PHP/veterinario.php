@@ -1,5 +1,5 @@
 <?php
-    namespace ClinicaVeterinaria\projeto\PHP;
+   namespace ClinicaVeterinaria\projeto\PHP;
 
     class Veterinario{
         //declarar as variaveis
@@ -30,12 +30,17 @@
         }//fim do construtor
 
        public function __get(string $dados):mixed
-{
+{      if (!property_exists($this, $dados)) {
+            throw new \InvalidArgumentException("Propriedade '$dados' não existe na classe " . __CLASS__);
+        }
     return $this->$dados;
 }//fim do get
 
 public function __set(string $variavel, mixed $novoDado):void
 {
+    if (!property_exists($this, $variavel)) {
+        throw new \InvalidArgumentException("Propriedade '$variavel' não existe na classe " . __CLASS__);
+    }
     $this->$variavel = $novoDado;
 }//fim do set
 

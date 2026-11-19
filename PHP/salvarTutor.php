@@ -6,6 +6,7 @@ use ClinicaVeterinaria\projeto\DAO\TutorDAO;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $codigo = filter_input(INPUT_POST, "codigo", FILTER_VALIDATE_INT);
     $nome = trim($_POST["nome"] ?? "");
     $cpf = trim($_POST["cpf"] ?? "");
     $telefone = trim($_POST["telefone"] ?? "");
