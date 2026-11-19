@@ -33,12 +33,39 @@ class Atualizar {
 
             $stmt = mysqli_prepare($conn, $sql);
 
-            mysqli_stmt_bind_param(
-                $stmt,
-                "si",
-                $novoDado,
-                $codigo
-            );
+           if ($campo === 'salario') {
+
+    if (!is_numeric($novoDado) || (float)$novoDado < 0) {
+        return "Informe um salário válido!";
+    }
+
+    $novoDado = (float)$novoDado;
+
+    if ($campo === 'salario') {
+
+    if (!is_numeric($novoDado) || (float)$novoDado < 0) {
+        return "Informe um salário válido!";
+    }
+
+    $novoDado = (float)$novoDado;
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "di",
+        $novoDado,
+        $codigo
+    );
+
+} else {
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "si",
+        $novoDado,
+        $codigo
+    );
+}
+}
 
             mysqli_stmt_execute($stmt);
 

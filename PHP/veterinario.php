@@ -29,15 +29,15 @@
             $this->telefone      = $telefone;
         }//fim do construtor
 
-        public function __get(string $dados):mixed
-        {
-            return $this->dados;
-        }//fim do get
+       public function __get(string $dados):mixed
+{
+    return $this->$dados;
+}//fim do get
 
-        public function __set(string $variavel, string $novoDado):void
-        {
-            $this->variavel = $novoDado;
-        }//fim do set
+public function __set(string $variavel, mixed $novoDado):void
+{
+    $this->$variavel = $novoDado;
+}//fim do set
 
         public function imprimir():string
         {
